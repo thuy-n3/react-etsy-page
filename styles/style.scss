@@ -127,3 +127,21 @@ body {
 /**
  * App code
  */
+
+ .container {
+
+    text-align: center;
+    width: 75%;
+    margin: 30px auto;
+
+    .about {
+        text-align: center;
+        width: 100%;
+        p {
+            text-align: center;
+            font-size: 25px;
+            font-style: italic;
+            margin: 2px;
+        }
+    }
+ }
