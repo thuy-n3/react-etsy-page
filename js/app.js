@@ -37,21 +37,21 @@ function app() {
           title: "hot john",
           seller: "slickbag",
           price: "25 cents",
-          descr: "this john is really hot and friendly.",
+          descr: "this john is really hot and friendly. this john is really hot and friendly. this john is really hot and friendly. this john is really hot and friendly. this john is really hot and friendly. this john is really hot and friendly. this john is really hot and friendly. this john is really hot and friendly. this john is really hot and friendly. this john is really hot and friendly. ",
           imageUrl: "https://robohash.org/john"
         },
         {
           title: "hot pockets",
           seller: "lean cuisine",
           price: "30lbs of silver",
-          descr: "these pockets are really hot and friendly.",
+          descr: "these pockets are really hot and friendly. these pockets are really hot and friendly. these pockets are really hot and friendly. these pockets are really hot and friendly. these pockets are really hot and friendly. these pockets are really hot and friendly. these pockets are really hot and friendly. ",
           imageUrl: "https://robohash.org/pockets"
         },
         {
           title: "fingerless gloves",
           seller: "blind children",
-          price: "$10",
-          descr: "if you don't buy these you're evil",
+          price: "10$",
+          descr: "if you don't buy these you're evil. if you don't buy these you're evil. if you don't buy these you're evil. if you don't buy these you're evil. if you don't buy these you're evil. if you don't buy these you're evil. if you don't buy these you're evil. if you don't buy these you're evil. if you don't buy these you're evil. ",
           imageUrl: "https://robohash.org/blindness"
         }
       ]
@@ -91,7 +91,7 @@ function app() {
         var newArray = []
         for (var i = 0; i < listings.length; i++){
           var listingObj = listings[i]
-          var component = <Listing listingData={listingObj}/>
+          var component = <Listing key={i} listingData={listingObj}/>
           newArray.push(component)          
         }
         return newArray
@@ -111,22 +111,73 @@ function app() {
    	})
 
    	var Listing = React.createClass({
+
+
+
+      _inflation: function() {
+        if (!this.state.ticking) {
+            var incrementPrice = function() {
+           this.setState({
+              price: this.state.price + 1,
+              ticking: true
+             })
+          }
+          var boundIncrementer = incrementPrice.bind(this)
+          this.intervalId = setInterval(boundIncrementer,1000)
+        }
+
+        else {
+          clearInterval(this.intervalId)
+        }
+        
+      },
+
+      _showMoreInfo: function() {
+          if (this.state.fullDescription) { //if fullDescription is showing
+              this.setState({
+                fullDescription: false,
+                buttonSymbol: "+"
+              })
+            }
+          else {
+            this.setState({
+              fullDescription: true,
+              buttonSymbol: "-"
+            })
+          }
+        
+      },
+
+      getInitialState: function() {
+        return {
+          fullDescription: false,
+          buttonSymbol: "+",
+          price: parseInt(this.props.listingData.price),
+          tickSymbol: '\u2191',
+          ticking: false
+        }
+      },
+
    		render: function(){
-        console.log("====listing function====")
-        console.log(this)
+        console.log(this.state)        
         var grabber = this.props.listingData
+        var descriptionToWrite
+        
+        if (this.state.fullDescription) descriptionToWrite = grabber.descr
+        else descriptionToWrite = grabber.descr.substr(0,140) + "..."
+
    			return (
    				<div className="listing">
    					<img src={this.props.listingData.imageUrl}/>
-   					<p className="price">HOW MUCH?? {grabber.price}</p>
-            <p className="descr">Seller: {grabber.seller}</p>
-            <p className="descr">why {grabber.descr}</p>
+   					<p className="price">HOW MUCH?? {this.state.price}<button onClick={this._inflation}>{this.state.tickSymbol}</button></p>
+            <p className="seller">Seller: {grabber.seller}</p>
+            <p className="descr">why {descriptionToWrite}<button onClick={this._showMoreInfo} className="moreInfo">{this.state.buttonSymbol}</button></p>
    				</div>
    				)
    		}
    	})
 
-    DOM.render(<AppView id="topView" arisFaveFood="shrimp" shopData={ironData} />,document.querySelector('.container'))
+    DOM.render(<AppView id="topView" shopData={ironData} />,document.querySelector('.container'))
 }
 
 app()

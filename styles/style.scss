@@ -6,12 +6,6 @@ p+p {
     margin-top: 0;
 }
 
-p {
-    max-width: 80ch;
-    margin-left: 0;
-    margin-right: auto;
-}
-
 ul, ol {
     max-width: 80ch;
     margin-left: 0;
@@ -134,14 +128,27 @@ body {
     width: 75%;
     margin: 30px auto;
 
+    .listing {
+        border: 20px solid salmon;
+        padding: 20px;
+        margin: 20px;
+    }
+
     .about {
+
         text-align: center;
         width: 100%;
+
         p {
             text-align: center;
             font-size: 25px;
             font-style: italic;
             margin: 2px;
+
+            button {
+                background: salmon;
+                margin-left: 15px;
+            }
         }
     }
  }
