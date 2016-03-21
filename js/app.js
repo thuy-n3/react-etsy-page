@@ -117,14 +117,14 @@ function app() {
       _inflation: function() {
         if (!this.state.ticking) {
             var incrementPrice = function() {
-           this.setState({
-              price: this.state.price + 1,
-              ticking: true,
-              tickSymbol: "||"
-             })
-          }
+               this.setState({
+                  price: this.state.price + 1,
+                  ticking: true,
+                  tickSymbol: "||"
+                 })
+           }
           var boundIncrementer = incrementPrice.bind(this)
-          this.intervalId = setInterval(boundIncrementer,1000)
+          this.intervalId = setInterval(boundIncrementer,500)
         }
 
         else {
