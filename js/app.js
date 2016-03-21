@@ -119,7 +119,8 @@ function app() {
             var incrementPrice = function() {
            this.setState({
               price: this.state.price + 1,
-              ticking: true
+              ticking: true,
+              tickSymbol: "||"
              })
           }
           var boundIncrementer = incrementPrice.bind(this)
@@ -128,6 +129,10 @@ function app() {
 
         else {
           clearInterval(this.intervalId)
+          this.setState({
+            tickSymbol: '\u2191',
+            ticking: false
+          })
         }
         
       },

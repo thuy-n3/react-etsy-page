@@ -132,6 +132,14 @@ body {
         border: 20px solid salmon;
         padding: 20px;
         margin: 20px;
+
+        button {
+            border: none;
+            margin-left: 10px;
+            background:salmon;
+            border: 5px solid teal;
+            padding: 2px 10px;
+        }
     }
 
     .about {
@@ -144,11 +152,6 @@ body {
             font-size: 25px;
             font-style: italic;
             margin: 2px;
-
-            button {
-                background: salmon;
-                margin-left: 15px;
-            }
         }
     }
  }
